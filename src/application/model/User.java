@@ -37,6 +37,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User by the name of: " + name + " and using the email address: " + eMail;
+		return "User by the name of: " + name + " and using the email address: " + eMail
+				+ " hashed pwd: " + password;
 	}
 }

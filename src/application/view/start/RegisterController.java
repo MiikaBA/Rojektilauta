@@ -35,7 +35,7 @@ public class RegisterController implements IController {
             	String pass = passField.getText();
             	
             	mainApp.registerUser(name, mail, pass);
-            	System.out.println(name + mail + pass);
+            	
             }
         });
 	}

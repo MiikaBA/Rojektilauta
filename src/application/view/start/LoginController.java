@@ -29,8 +29,12 @@ public class LoginController implements IController {
             	String email = mailField.getText();
             	String pass = passField.getText();
             	//TODO Luo käyttäjän haku tyyliin:
-                //mainApp.fetchUser(email, pass);
-            	System.out.println(email + pass);
+                if (!mainApp.loginUser(email, pass)) {
+                	loginButton.setText("Try Again!!");
+                }else {
+                	loginButton.setText("Toimii!!");
+                }
+            	
             }
         });
 	}
