@@ -1,7 +1,14 @@
 package application.controller;
 	
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Arrays;
+import java.sql.*;
 
+import application.model.DBConn;
+import application.model.HashHandler;
+import application.model.Passwords;
 import application.model.User;
 import application.view.*;
 import javafx.application.Application;
@@ -20,9 +27,12 @@ public class Main extends Application {
 	private IController login;
 	private IController register;
 	private IController mainView;
+	private Connection conn = null;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			//System.out.println("XD");
 			this.primaryStage = primaryStage;
 			
 			this.primaryStage.setTitle("Project Manager");
@@ -119,8 +129,36 @@ public class Main extends Application {
 	
 	public void registerUser(String name, String email, String password) {
 		//TODO korvataan tää kirjottamalla db:seen uusi User ja hakemalla se.
-		user = new User(name, email, password);
+		
+		byte[] salt = HashHandler.createSalt();
+		String[] hashedPWDandSALT = new String[2];
+		try {
+			hashedPWDandSALT = HashHandler.generateHash(password, salt);
+		}catch(NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		
+		user = new User(name, email, hashedPWDandSALT[0]);
 		System.out.println(user);
+		
+		try {
+			if(conn == null) {
+				DBConn connector = new DBConn();
+				conn = connector.getConnection();
+			}
+			Statement stmt = conn.createStatement();
+			String query = "INSERT INTO User " +
+						   "VALUES (NULL, '" + name + "', '" + email + "', '" + hashedPWDandSALT[0]
+								   + "', '" + hashedPWDandSALT[1] + "')";
+			int count = stmt.executeUpdate(query);
+			System.out.println("tän verran muutoksii: " + count);
+			stmt.close();
+			conn.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 		//TODO siirrytään projektien tarkastelu näyttöön:
 		//showUserProjects();
 	}
@@ -128,11 +166,37 @@ public class Main extends Application {
 	public Boolean loginUser(String email, String password) {
 		//TODO DB komponentti palauttaa haetuilla tiedoilla löytämänsä käyttäjän tai falsee jolloin pyydetään
 		//yrittämään kirjautumista uudelleen.
+		try {
+			
+			DBConn connector = new DBConn();
+			conn = connector.getConnection();
+			
+			Statement stmt = conn.createStatement();
+			String query = "SELECT UserEmail, PasswordHash, PasswordSalt FROM User WHERE "
+					+ "UserEmail = '" + email + "'";
+			ResultSet rs = stmt.executeQuery(query);
+			
+			rs.next();
+			String retrievedEmail = rs.getString("UserEmail");
+			String retrievedHash = rs.getString("PasswordHash");
+			String retrievedSalt = rs.getString("PasswordSalt");
+			
+			rs.close();
+			conn.close();
+			
+			if(HashHandler.authenticatePass(password, retrievedHash, retrievedSalt)) {
+				return true;
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		//TODO siirrytään projektien tarkastelu näyttöön:
 		//showUserProjects();
-		return true;
+		return false;
 	}
+	
 	
 	public static void main(String[] args) {
 		launch(args);
