@@ -26,6 +26,7 @@ public class Main extends Application {
 	private IController start;
 	private IController login;
 	private IController register;
+	private IController mainView;
 	private Connection conn = null;
 	
 	@Override
@@ -104,6 +105,26 @@ public class Main extends Application {
 			}catch(IOException e) {
 	            e.printStackTrace();
 	        }
+	}
+	
+	public void showUserProjects() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(Main.class.getResource("/application/view/start/mainView.fxml"));
+	        System.out.println(loader.getLocation());
+	        rootLayout = (VBox) loader.load();
+	        
+	        mainView = loader.getController();
+	        mainView.setMainApp(this);
+	        
+	        Scene scene = new Scene(rootLayout);
+	        primaryStage.setScene(scene);
+	        primaryStage.show();
+	        
+			
+		}catch(IOException e) {
+            e.printStackTrace();
+        }
 	}
 	
 	public void registerUser(String name, String email, String password) {
