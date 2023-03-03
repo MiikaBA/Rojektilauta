@@ -34,7 +34,6 @@ public class LoginController implements IController {
                 }else {
                 	loginButton.setText("Toimii!!");
                 }
-            	
             }
         });
 	}

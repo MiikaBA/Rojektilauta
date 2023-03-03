@@ -6,17 +6,18 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="mainViewBackground" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: linear-gradient(to top left, #F6B46F, #35ACF1);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.start.MainViewController">
    <children>
-      <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <MenuBar style="-fx-background-color: #F6B46F;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -35,49 +36,89 @@
           </Menu>
         </menus>
       </MenuBar>
-      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <center>
-            <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="550.0" prefWidth="900.0" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </BorderPane.margin>
-               <content>
-                  <GridPane alignment="CENTER" prefHeight="550.0" prefWidth="900.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                     <children>
-                        <Button layoutX="50.0" layoutY="50.0" mnemonicParsing="false" text="Button">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding></Button>
-                     </children>
-                  </GridPane>
-               </content>
+      <ScrollPane id="projectGridScrollPane" hbarPolicy="NEVER" layoutX="150.0" layoutY="159.0" maxHeight="-Infinity" maxWidth="-Infinity" pannable="true" prefHeight="550.0" prefWidth="900.0" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-radius: 12; -fx-border-image-insets: -5; -fx-border-color: linear-gradient(to top left, #35ACF1, #F6B46F);" vbarPolicy="NEVER">
+         <content>
+            <GridPane id="projectGrid" alignment="CENTER" layoutX="100.0" layoutY="100.0" prefHeight="541.0" prefWidth="890.0" style="-fx-background-color: transparent; -fx-background: transparent;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
-            </ScrollPane>
-         </center>
-         <top>
-            <Text layoutX="100.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ROJEKTILAUTA - PROJEKTINÄKYMÄ" wrappingWidth="950.13671875" x="100.0" y="100.0" BorderPane.alignment="TOP_LEFT">
-               <font>
-                  <Font size="57.0" />
-               </font>
-               <BorderPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </BorderPane.margin>
-            </Text>
-         </top></BorderPane>
+               <children>
+                  <Button id="ProjectButton1" mnemonicParsing="false" prefHeight="110.0" prefWidth="212.0" style="-fx-background-insets: 0; -fx-background-radius: 10; -fx-background-color: linear-gradient(to top left, #35ACF1, #F6B46F); -fx-border-radius: 12; -fx-border-insets: -5; -fx-border-color: linear-gradient(to top left, #35ACF1, #F6B46F);" text="Esimerkki projekti 1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.729411780834198" green="0.5764706134796143" blue="0.364705890417099" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Button>
+                  <Button id="ProjectButton2" mnemonicParsing="false" prefHeight="110.0" prefWidth="212.0" style="-fx-background-insets: 0; -fx-background-radius: 10; -fx-background-color: linear-gradient(to top left, #35ACF1, #F6B46F); -fx-border-radius: 12; -fx-border-insets: -5; -fx-border-color: linear-gradient(to top left, #35ACF1, #F6B46F);" text="Esimerkki projekti 2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.729411780834198" green="0.5764706134796143" blue="0.364705890417099" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Button>
+               </children>
+            </GridPane>
+         </content>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </ScrollPane>
+      <Text id="mainViewHeader" fill="WHITE" layoutX="310.0" layoutY="-91.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="ROJEKTILAUTA" x="100.0" y="200.0">
+         <font>
+            <Font name="Symbol" size="58.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.9647058844566345" green="0.7058823704719543" blue="0.43529412150382996" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Text>
+      <Button id="addProjectButton" layoutX="888.0" layoutY="58.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="165.0" style="-fx-background-insets: 0; -fx-background-radius: 10; -fx-background-color: #F6B46F;" text="Lisää projekti">
+         <font>
+            <Font size="21.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.729411780834198" green="0.5764706134796143" blue="0.364705890417099" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+      <Button id="settingsButton" layoutX="1066.0" layoutY="58.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="120.0" style="-fx-background-insets: 0; -fx-background-radius: 10; -fx-background-color: #F6B46F;" text="Asetukset">
+         <font>
+            <Font size="21.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.729411780834198" green="0.5764706134796143" blue="0.364705890417099" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
    </children>
 </AnchorPane>
