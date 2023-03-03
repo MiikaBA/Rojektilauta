@@ -68,7 +68,7 @@
             </DropShadow>
          </effect>
       </Button>
-      <ScrollPane id="categoryPane" layoutX="101.0" layoutY="192.0" prefHeight="525.0" prefWidth="320.0" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-radius: 12; -fx-border-image-insets: -5; -fx-border-color: gray;" />
+      <ScrollPane id="categoryPane" layoutX="101.0" layoutY="192.0" prefHeight="525.0" prefWidth="320.0" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-radius: 12; -fx-border-image-insets: -5; -fx-border-color: #ff0000;" />
       <ScrollPane id="categoryPane" layoutX="450.0" layoutY="192.0" prefHeight="525.0" prefWidth="320.0" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-radius: 12; -fx-border-image-insets: -5; -fx-border-color: yellow;" />
       <ScrollPane id="categoryPane" layoutX="803.0" layoutY="192.0" prefHeight="525.0" prefWidth="320.0" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-radius: 12; -fx-border-image-insets: -5; -fx-border-color: green;" />
       <Text id="notStartedHeader" fill="WHITE" layoutX="101.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not Started" wrappingWidth="229.8525390625">
@@ -78,7 +78,7 @@
          <effect>
             <DropShadow>
                <color>
-                  <Color red="0.501960813999176" green="0.501960813999176" blue="0.501960813999176" />
+                  <Color red="1.0" />
                </color>
             </DropShadow>
          </effect>

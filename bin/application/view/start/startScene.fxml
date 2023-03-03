@@ -39,14 +39,16 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.start.StartController">
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.start.StartController">
   <children>
-    <MenuBar VBox.vgrow="NEVER">
+    <MenuBar style="-fx-background-color: #F6B46F;" VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
@@ -87,24 +89,51 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <VBox alignment="CENTER" prefHeight="775.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox alignment="CENTER" prefHeight="775.0" prefWidth="1200.0" style="-fx-background-color: linear-gradient(to top left, #F6B46F, #35ACF1);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label contentDisplay="CENTER" text="Welcome to Rojektilauta">
                      <font>
                         <Font size="48.0" />
                      </font>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.9647058844566345" green="0.7058823704719543" blue="0.43529412150382996" />
+                           </color>
+                        </DropShadow>
+                     </effect>
                   </Label>
                   <HBox alignment="CENTER" prefHeight="150.0" prefWidth="1200.0">
                      <children>
-                        <Button fx:id="loginButton" mnemonicParsing="false" text="Login">
+                        <Button fx:id="loginButton" mnemonicParsing="false" prefHeight="47.0" prefWidth="80.0" style="-fx-background-color: #F6B46F;" text="Login">
                            <HBox.margin>
                               <Insets right="50.0" />
                            </HBox.margin>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color red="0.9647058844566345" green="0.7058823704719543" blue="0.43529412150382996" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="registerButton" mnemonicParsing="false" text="Register">
+                        <Button fx:id="registerButton" mnemonicParsing="false" style="-fx-background-color: #F6B46F;" text="Register">
                            <HBox.margin>
                               <Insets left="50.0" />
                            </HBox.margin>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color red="0.9647058844566345" green="0.7058823704719543" blue="0.43529412150382996" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
                         </Button>
                      </children>
                   </HBox>
