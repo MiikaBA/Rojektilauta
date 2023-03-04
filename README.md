@@ -1,7 +1,9 @@
 # Rojektilauta
 
 Rojektilauta is a JavaFX based project geared towards giving students a free project managing software that would allow
-it's users to manage their projects with their team. Currently works when installed locally alongside a sql database.
+it's users to manage their projects with their team.
+
+The original goal of this project was to make a light and easily accessible application and UI that would help you keep all your projects on track and overall easy to manage. Currently works when installed locally alongside a sql database.
 
 Libraries used: JDK, JavaFX, MariaDB ConnectorJ.
 
