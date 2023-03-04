@@ -1,0 +1,50 @@
+CREATE TABLE User
+(
+  UserID INT NOT NULL AUTO_INCREMENT,
+  UserName VARCHAR(255) NOT NULL,
+  UserEMail VARCHAR(255) NOT NULL,
+  PasswordHash VARCHAR(255) NOT NULL,
+  PasswordSalt VARCHAR(255) NOT NULL,
+  PRIMARY KEY (UserID)
+);
+
+CREATE TABLE Project
+(
+  ProjectID INT NOT NULL AUTO_INCREMENT,
+  ProjectName VARCHAR(255) NOT NULL,
+  InfoDump VARCHAR(255) NOT NULL,
+  PRIMARY KEY (ProjectID)
+);
+
+CREATE TABLE Category
+(
+  CategoryID INT NOT NULL AUTO_INCREMENT,
+  CategoryName VARCHAR(255) NOT NULL,
+  ProjectID INT NOT NULL,
+  PRIMARY KEY (CategoryID),
+  FOREIGN KEY (ProjectID) REFERENCES Project(ProjectID)
+);
+
+CREATE TABLE Owns
+(
+  UserID INT NOT NULL AUTO_INCREMENT,
+  ProjectID INT NOT NULL,
+  PRIMARY KEY (UserID, ProjectID),
+  FOREIGN KEY (UserID) REFERENCES User(UserID),
+  FOREIGN KEY (ProjectID) REFERENCES Project(ProjectID)
+);
+
+CREATE TABLE Task
+(
+  TaskID INT NOT NULL AUTO_INCREMENT,
+  TaskName VARCHAR(255) NOT NULL,
+  TaskDescription VARCHAR(255) NOT NULL,
+  TaskPriority INT NOT NULL,
+  CategoryID INT NOT NULL,
+  PRIMARY KEY (TaskID),
+  FOREIGN KEY (CategoryID) REFERENCES Category(CategoryID)
+);
+
+DROP USER IF EXISTS yourUser@localhost;
+CREATE USER yourUser@localhost IDENTIFIED BY 'yourPass';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Rojekti.* TO yourUser@localhost;
