@@ -20,6 +20,9 @@ public class LoginController implements IController {
 	
 	@FXML
 	Button loginButton;
+	
+	@FXML
+	Button registerButton;
 
 	@FXML
 	public void initialize() {
@@ -32,8 +35,16 @@ public class LoginController implements IController {
                 if (!mainApp.loginUser(email, pass)) {
                 	loginButton.setText("Try Again!!");
                 }else {
-                	loginButton.setText("Toimii!!");
+                	loginButton.setText("Loading");
+                	mainApp.showUserProjects();
                 }
+            }
+        });
+		
+		registerButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	mainApp.showRegister();
             }
         });
 	}

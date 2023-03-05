@@ -25,6 +25,9 @@ public class RegisterController implements IController {
 	Button registerButton;
 	
 	@FXML
+	Button cancelButton;
+	
+	@FXML
 	public void initialize() {
 		
 		registerButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -33,9 +36,18 @@ public class RegisterController implements IController {
             	String name = nameField.getText();
             	String mail = mailField.getText();
             	String pass = passField.getText();
+            	registerButton.setText("Submitting");
             	
             	mainApp.registerUser(name, mail, pass);
+            	mainApp.showUserProjects();
             	
+            }
+        });
+		
+		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	mainApp.showLogin();
             }
         });
 	}

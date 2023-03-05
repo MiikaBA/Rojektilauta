@@ -15,6 +15,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
@@ -22,6 +23,7 @@ import javafx.scene.layout.VBox;
 public class Main extends Application {
 	private Stage primaryStage;
 	private VBox rootLayout;
+	private AnchorPane mainViewLayout;
 	private User user; //TODO luodaan User luokka, joka voidaan tallentaa db.
 	private IController start;
 	private IController login;
@@ -49,24 +51,22 @@ public class Main extends Application {
 	}
 	
 	public void initStartScene() {
-        try {
-            // Load start scene from fxml file.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("/application/view/start/startScene.fxml"));
-            System.out.println(loader.getLocation());
-            rootLayout = (VBox) loader.load();
-            
-            start = loader.getController();
-            
-            start.setMainApp(this);
-            
-            // Show the scene containing the root layout.
-            Scene scene = new Scene(rootLayout);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		try {
+			FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(Main.class.getResource("/application/view/start/loginForm.fxml"));
+	        System.out.println(loader.getLocation());
+	        rootLayout = (VBox) loader.load();
+	        
+	        login = loader.getController();
+	        login.setMainApp(this);
+	        
+	        Scene scene = new Scene(rootLayout);
+	        primaryStage.setScene(scene);
+	        primaryStage.show();
+	        
+			}catch(IOException e) {
+	            e.printStackTrace();
+	        }
     }
 	
 	public void showLogin() {
@@ -112,12 +112,12 @@ public class Main extends Application {
 			FXMLLoader loader = new FXMLLoader();
 	        loader.setLocation(Main.class.getResource("/application/view/start/mainView.fxml"));
 	        System.out.println(loader.getLocation());
-	        rootLayout = (VBox) loader.load();
+	        mainViewLayout = (AnchorPane) loader.load();
 	        
 	        mainView = loader.getController();
 	        mainView.setMainApp(this);
 	        
-	        Scene scene = new Scene(rootLayout);
+	        Scene scene = new Scene(mainViewLayout);
 	        primaryStage.setScene(scene);
 	        primaryStage.show();
 	        
@@ -151,6 +151,7 @@ public class Main extends Application {
 						   "VALUES (NULL, '" + name + "', '" + email + "', '" + hashedPWDandSALT[0]
 								   + "', '" + hashedPWDandSALT[1] + "')";
 			int count = stmt.executeUpdate(query);
+			
 			System.out.println("tän verran muutoksii: " + count);
 			stmt.close();
 			conn.close();
