@@ -9,7 +9,7 @@ Libraries used: JDK, JavaFX, MariaDB ConnectorJ.
 
 ## Installation
 
-Using the DBScript.txt provided in the project root initiate your database to be used by the app. Then you can run the app.
+Using the DBScript.txt provided in the project root initiate your database to be used by the app. Then you can build and run the app from Eclipse.
 
 After installation you register or log in and then you can use the app.
 
