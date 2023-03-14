@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.DropdownButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="439.0" style="-fx-background-color: #FBFCFC; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <Label fx:id="lblTaskName" prefHeight="17.0" prefWidth="285.0" text="Create a new ui for client x" BorderPane.alignment="CENTER_LEFT">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </Label>
+   </center>
+   <padding>
+      <Insets left="10.0" right="10.0" />
+   </padding>
+   <right>
+      <DropdownButton minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="102.0" style="-fx-background-radius: 1em; -fx-background-color: red;" BorderPane.alignment="CENTER">
+          <items>
+              <MenuItem text="Not Started" />
+              <MenuItem style="-fx-background-color: yellow;" text="In Progress" />
+              <MenuItem style="-fx-background-color: green;" text="Done" />
+          </items>
+      </DropdownButton>
+   </right>
+</BorderPane>
