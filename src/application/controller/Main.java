@@ -34,12 +34,11 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			//System.out.println("XD");
 			this.primaryStage = primaryStage;
 			
 			this.primaryStage.setTitle("Project Manager");
 			if(user==null) {
-				initStartScene();
+				showLogin();
 			}
 			System.out.println("kirjattu jo sisään");
 			
@@ -49,25 +48,6 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	
-	public void initStartScene() {
-		try {
-			FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(Main.class.getResource("/application/view/start/loginForm.fxml"));
-	        System.out.println(loader.getLocation());
-	        rootLayout = (VBox) loader.load();
-	        
-	        login = loader.getController();
-	        login.setMainApp(this);
-	        
-	        Scene scene = new Scene(rootLayout);
-	        primaryStage.setScene(scene);
-	        primaryStage.show();
-	        
-			}catch(IOException e) {
-	            e.printStackTrace();
-	        }
-    }
 	
 	public void showLogin() {
 		try {
@@ -128,73 +108,22 @@ public class Main extends Application {
 	}
 	
 	public void registerUser(String name, String email, String password) {
-		//TODO korvataan tää kirjottamalla db:seen uusi User ja hakemalla se.
+		User newU = DBConn.getInstance().registerUser(name, email, password);
 		
-		byte[] salt = HashHandler.createSalt();
-		String[] hashedPWDandSALT = new String[2];
-		try {
-			hashedPWDandSALT = HashHandler.generateHash(password, salt);
-		}catch(NoSuchAlgorithmException e) {
-			e.printStackTrace();
+		if(newU != null) {
+			user = newU;
+			showUserProjects();
 		}
 		
-		user = new User(name, email, hashedPWDandSALT[0]);
-		System.out.println(user);
-		
-		try {
-			if(conn == null) {
-				DBConn connector = new DBConn();
-				conn = connector.getConnection();
-			}
-			Statement stmt = conn.createStatement();
-			String query = "INSERT INTO User " +
-						   "VALUES (NULL, '" + name + "', '" + email + "', '" + hashedPWDandSALT[0]
-								   + "', '" + hashedPWDandSALT[1] + "')";
-			int count = stmt.executeUpdate(query);
-			
-			System.out.println("tän verran muutoksii: " + count);
-			stmt.close();
-			conn.close();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		
-		//TODO siirrytään projektien tarkastelu näyttöön:
-		//showUserProjects();
+		System.out.println("ei oo fresh.");
 	}
 	
 	public Boolean loginUser(String email, String password) {
-		//TODO DB komponentti palauttaa haetuilla tiedoilla löytämänsä käyttäjän tai falsee jolloin pyydetään
-		//yrittämään kirjautumista uudelleen.
-		try {
-			
-			DBConn connector = new DBConn();
-			conn = connector.getConnection();
-			
-			Statement stmt = conn.createStatement();
-			String query = "SELECT UserEmail, PasswordHash, PasswordSalt FROM User WHERE "
-					+ "UserEmail = '" + email + "'";
-			ResultSet rs = stmt.executeQuery(query);
-			
-			rs.next();
-			String retrievedEmail = rs.getString("UserEmail");
-			String retrievedHash = rs.getString("PasswordHash");
-			String retrievedSalt = rs.getString("PasswordSalt");
-			
-			rs.close();
-			conn.close();
-			
-			if(HashHandler.authenticatePass(password, retrievedHash, retrievedSalt)) {
-				return true;
-			}
-			
-		}catch(Exception e) {
-			e.printStackTrace();
+		User newU = DBConn.getInstance().loginUser(email, password);
+		if(newU != null) {
+			user = newU;
+			return true;
 		}
-		
-		//TODO siirrytään projektien tarkastelu näyttöön:
-		//showUserProjects();
 		return false;
 	}
 	
