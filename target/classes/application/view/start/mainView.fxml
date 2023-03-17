@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="mainViewBackground" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: linear-gradient(to top left, #F6B46F, #35ACF1);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.start.MainViewController">
+<AnchorPane id="mainViewBackground" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: linear-gradient(to top left, #F6B46F, #35ACF1);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.start.MainViewController">
    <children>
       <MenuBar style="-fx-background-color: #F6B46F;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <menus>
@@ -108,7 +108,7 @@
             </DropShadow>
          </effect>
       </Button>
-      <Button id="settingsButton" layoutX="1066.0" layoutY="58.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="120.0" style="-fx-background-insets: 0; -fx-background-radius: 10; -fx-background-color: #F6B46F;" text="Asetukset">
+      <Button id="settingsButton" fx:id="settingsButton" layoutX="1066.0" layoutY="58.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="120.0" style="-fx-background-insets: 0; -fx-background-radius: 10; -fx-background-color: #F6B46F;" text="Asetukset">
          <font>
             <Font size="21.0" />
          </font>

@@ -24,7 +24,7 @@ public class Main extends Application {
 	private Stage primaryStage;
 	private VBox rootLayout;
 	private AnchorPane mainViewLayout;
-	private User user; //TODO luodaan User luokka, joka voidaan tallentaa db.
+	private User user;
 	private IController start;
 	private IController login;
 	private IController register;
