@@ -1,9 +1,16 @@
 package application.view.start;
 
+import java.io.IOException;
+
 import application.controller.Main;
 import application.view.IController;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.*;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class Settings implements IController {
 	
@@ -20,7 +27,21 @@ public class Settings implements IController {
 	
 	@FXML
 	public void initialize() {
-		
+		changeButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            		String newP = newPass.getText();
+            		
+            		if(newP == "" || newP.length() < 8) {
+            			changeButton.setText("Try again.");
+            		}else {
+            			System.out.print(mainApp.changePassword(newP));
+            		}
+            		
+            		
+            	}
+            
+        });
 	}
 
 	@Override

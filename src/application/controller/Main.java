@@ -31,6 +31,7 @@ public class Main extends Application {
 	private IController mainView;
 	private Connection conn = null;
 	
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -48,6 +49,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	public void showLogin() {
 		try {
@@ -113,9 +115,9 @@ public class Main extends Application {
 		if(newU != null) {
 			user = newU;
 			showUserProjects();
+		}else {
+			System.out.println("ei oo fresh.");
 		}
-		
-		System.out.println("ei oo fresh.");
 	}
 	
 	public Boolean loginUser(String email, String password) {
@@ -127,6 +129,21 @@ public class Main extends Application {
 		return false;
 	}
 	
+	public Boolean changePassword(String newPass) {
+		if(DBConn.getInstance().authenticateUser(user)) {
+			user = DBConn.getInstance().changePassword(newPass, user);
+			
+			if(user != null) {
+				return true;
+			}
+		}
+			
+		return false;
+	}
+	
+	public User getUser() {
+		return user;
+	}
 	
 	public static void main(String[] args) {
 		launch(args);

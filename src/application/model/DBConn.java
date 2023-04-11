@@ -70,7 +70,7 @@ public class DBConn {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return loginUser(email, password);
 	}
 	
 	public User loginUser(String email, String password) {
@@ -79,11 +79,12 @@ public class DBConn {
 			conn = getConnection();
 			
 			Statement stmt = conn.createStatement();
-			String query = "SELECT UserEmail, UserName, PasswordHash, PasswordSalt FROM User WHERE "
+			String query = "SELECT UserID, UserEmail, UserName, PasswordHash, PasswordSalt FROM User WHERE "
 					+ "UserEmail = '" + email + "'";
 			ResultSet rs = stmt.executeQuery(query);
 			
 			rs.next();
+			int retrievedID = rs.getInt("UserID");
 			String retrievedEmail = rs.getString("UserEmail");
 			String retrievedName = rs.getString("UserName");
 			String retrievedHash = rs.getString("PasswordHash");
@@ -93,12 +94,59 @@ public class DBConn {
 			conn.close();
 			
 			if(HashHandler.authenticatePass(password, retrievedHash, retrievedSalt)) {
-				return new User(retrievedName, retrievedEmail, retrievedHash);
+				return new User(retrievedID, retrievedName, retrievedEmail, retrievedHash);
 			}
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+		return null;
+	}
+	
+	public boolean authenticateUser(User currUser) {
+		try {
+			Connection conn = null;
+			conn = getConnection();
+			
+			Statement stmt = conn.createStatement();
+			String query = "SELECT UserID FROM User WHERE "
+					+ "UserEmail = '" + currUser.getEMail() + "'";
+			ResultSet rs = stmt.executeQuery(query);
+			
+			rs.next();
+			int retrievedID = rs.getInt("UserID");
+			
+			if(retrievedID == currUser.getID()) {
+				return true;
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public User changePassword(String newPass, User currUser) {
+		
+		String[] hashedPWDandSALT = new String[2];
+		try {
+			hashedPWDandSALT = HashHandler.generateHash(newPass, HashHandler.createSalt());
+		}catch(NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		try{
+			Connection conn = getConnection();
+			Statement stmt = conn.createStatement();
+			String sql = "UPDATE User SET PasswordHash = '" + hashedPWDandSALT[0] + "', PasswordSalt = '" + hashedPWDandSALT[1] 
+					+ "' WHERE UserID = " + currUser.getID() + ";";
+			stmt.executeUpdate(sql);
+			
+			return loginUser(currUser.getEMail(), newPass);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 		return null;
 	}

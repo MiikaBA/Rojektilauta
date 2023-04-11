@@ -39,7 +39,6 @@ public class RegisterController implements IController {
             	registerButton.setText("Submitting");
             	
             	mainApp.registerUser(name, mail, pass);
-            	mainApp.showUserProjects();
             	
             }
         });

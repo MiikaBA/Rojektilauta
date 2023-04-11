@@ -2,12 +2,14 @@ package application.model;
 import java.util.ArrayList;
 
 public class User {
+	private int id;
 	private String name;
 	private String eMail;
 	private String password;
 	private ArrayList<Project> projectList = new ArrayList<>();
 	
-	public User(String n, String e, String p) {
+	public User(int id, String n, String e, String p) {
+		this.id = id;
 		name = n;
 		eMail = e;
 		password = p;
@@ -30,6 +32,10 @@ public class User {
 	// Getters
 	public String getName() {
 		return name;
+	}
+	
+	public int getID() {
+		return id;
 	}
 	
 	public String getEMail() {
